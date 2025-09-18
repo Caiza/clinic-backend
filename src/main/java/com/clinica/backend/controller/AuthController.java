@@ -50,10 +50,10 @@ public class AuthController {
             throw new RuntimeException("Usuário já existe");
         }
 
-        User newUser = new User();
+        User newUser = new User(request.getName(), request.getUsername(), passwordEncoder.encode(request.getPassword()), "USER");
         newUser.setName(request.getName());
         newUser.setUsername(request.getUsername());
-        newUser.setPassword(passwordEncoder.encode(request.getPassword())); // senha criptografada
+        newUser.setPassword(passwordEncoder.encode(request.getPassword()));
         newUser.setRole("USER");
 
         userService.save(newUser);

@@ -45,8 +45,13 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()   // login/registro liberados
-                        .requestMatchers("/api/pacientes/**").hasRole("ADMIN") // exemplo: só ADMIN acessa
+                        .requestMatchers(
+                                "/auth/**",
+                                "/api/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())

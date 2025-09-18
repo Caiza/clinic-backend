@@ -16,6 +16,7 @@ public class PatientService {
     public List<Patient> patientList(){
         return repository.findAll();
     }
+
     public Patient save(Patient patient){
         return repository.save(patient);
     }

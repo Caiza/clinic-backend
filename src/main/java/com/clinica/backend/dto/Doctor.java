@@ -22,5 +22,4 @@ public class Doctor {
     private String specialty;
 
 
-
 }

@@ -1,4 +1,4 @@
-package com.clinica.backend.FactoryTest;
+package com.clinica.backend.factoryTest;
 
 import com.clinica.backend.dto.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -1,8 +1,7 @@
-package com.clinica.backend.Repository;
+package com.clinica.backend.repository;
 
-import com.clinica.backend.FactoryTest.UserFactory;
+import com.clinica.backend.factoryTest.UserFactory;
 import com.clinica.backend.dto.User;
-import com.clinica.backend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

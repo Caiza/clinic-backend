@@ -1,9 +1,8 @@
-package com.clinica.backend.Service;
+package com.clinica.backend.service;
 
-import com.clinica.backend.FactoryTest.UserFactory;
+import com.clinica.backend.factoryTest.UserFactory;
 import com.clinica.backend.dto.User;
 import com.clinica.backend.repository.UserRepository;
-import com.clinica.backend.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,7 +15,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class ServiceTest {
+public class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;

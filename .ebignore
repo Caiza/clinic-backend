@@ -1,0 +1,8 @@
+.git
+.idea
+*.iml
+*.md
+*.pdf
+
+# não ignore o target/
+# target/

@@ -29,7 +29,7 @@ public class User {
     @Column()
     private String role; // ex.: ROLE_USER
 
-    public User(String username, String password, String user, String role) {
+    public User(String username, String password, String role) {
     }
 
 }

@@ -50,8 +50,7 @@ public class AuthController {
             throw new RuntimeException("Usuário já existe");
         }
 
-        User newUser = new User(request.getName(), request.getUsername(), passwordEncoder.encode(request.getPassword()), "USER");
-        newUser.setName(request.getName());
+        User newUser = new User(request.getUsername(), passwordEncoder.encode(request.getPassword()), "USER");
         newUser.setUsername(request.getUsername());
         newUser.setPassword(passwordEncoder.encode(request.getPassword()));
         newUser.setRole("USER");
@@ -64,7 +63,6 @@ public class AuthController {
 
 class AuthRequest {
     private String username;
-    private String name;
     private String password;
 
     public String getUsername() {
@@ -83,11 +81,4 @@ class AuthRequest {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

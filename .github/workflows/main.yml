@@ -65,4 +65,4 @@ jobs:
           environment_name: "clinicdev-env"     # nome do ambiente
           version_label: ${{ github.run_id }}
           region: "eu-central-1"                # região AWS
-          deployment_package: "target/*.jar"
+          deployment_package: "target/app.jar"

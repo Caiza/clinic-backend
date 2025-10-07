@@ -72,7 +72,7 @@ jobs:
           environment_name: "clinica-staging-env"
           region: "eu-central-1"
           version_label: ${{ github.run_number }}
-          deployment_package: spring-boot-app/app.jar
+          deployment_package: "target/app.jar"
 
   # =========================
   # 4. Deploy to PRODUCTION (Manual Approval)

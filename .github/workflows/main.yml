@@ -66,14 +66,14 @@ jobs:
       - name: Deploy to Elastic Beanstalk (Staging)
         uses: einaregilsson/beanstalk-deploy@v21
         with:
-              application_name: clinica-backend
-              environment_name: clinica-staging-env
-              version_label: ${{ github.run_number }}
-              region: eu-central-1
-              file: app.jar   # <<< Agora é só o arquivo, não "spring-boot-app/app.jar"
-              aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-              aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-              wait_for_deployment: true
+          application_name: clinica-backend
+          environment_name: clinica-staging-env
+          version_label: ${{ github.run_number }}
+          region: eu-central-1
+          deployment_package: target/app.jar   # <<< aqui está o fix
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          wait_for_deployment: true
 
   # =========================
   # 4. Deploy to PRODUCTION (Manual Approval)

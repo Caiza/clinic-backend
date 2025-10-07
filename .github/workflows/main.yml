@@ -66,3 +66,4 @@ jobs:
           version_label: ${{ github.run_id }}
           region: "eu-central-1"                # região AWS
           deployment_package: "target/app.jar"
+          bucket_name: "clinic-bucket-eb"

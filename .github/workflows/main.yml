@@ -89,17 +89,18 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: spring-boot-app
-          path: target/app.jar
-
+          path: target
+  
       - name: Deploy to Elastic Beanstalk (Production)
         uses: einaregilsson/beanstalk-deploy@v21
         with:
-          application_name: clinica-backend
-          environment_name: clinica-prod-env
-          version_label: ${{ github.run_number }}
-          region: eu-central-1
-          deployment_package: target/app.jar
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: clinica-backend
+          environment_name: clinica-prod-env
+          region: eu-central-1
+          version_label: ${{ github.run_number }}-${{ github.sha }}
+          deployment_package: target/app.jar
           wait_for_deployment: true
-          
+  
+            

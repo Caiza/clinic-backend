@@ -67,7 +67,7 @@ jobs:
         with:
             application_name: clinica-backend
             environment_name: clinica-staging-env
-            version_label: ${{ github.run_number }}
+            version_label: ${{ github.run_number }}-${{ github.sha }}
             region: eu-central-1
             deployment_package: target/app.jar
             aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}

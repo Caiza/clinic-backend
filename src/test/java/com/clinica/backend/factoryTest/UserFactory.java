@@ -3,7 +3,9 @@ package com.clinica.backend.factoryTest;
 import com.clinica.backend.dto.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("test")
 public class UserFactory {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

@@ -83,7 +83,7 @@ jobs:
     needs: deploy-staging
     environment:
       name: production
-      url: https://minha-app.elasticbeanstalk.com   # ajuste sua URL
+      url: http://clinica-prod-env.eba-xzv2ekxq.eu-central-1.elasticbeanstalk.com/
     steps:
       - name: Download artifact
         uses: actions/download-artifact@v4

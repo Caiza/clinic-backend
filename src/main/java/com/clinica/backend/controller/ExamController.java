@@ -1,6 +1,7 @@
 package com.clinica.backend.controller;
 
 import com.clinica.backend.dto.Exam;
+import com.clinica.backend.exception.ExamNotFoundException;
 import com.clinica.backend.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,24 +28,23 @@ public class ExamController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Exam> updatePatient(@PathVariable Long id, @RequestBody Exam examNew){
-        return service.findById(id)
+    public ResponseEntity<Exam> updateExam(@PathVariable Long id, @RequestBody Exam examNew){
+        Exam updated = service.findById(id)
                  .map(exam ->  {
                      exam.setName(examNew.getName());
-                     Exam updated = service.save(exam);
-            return ResponseEntity.ok(updated);
-        })
-                 .orElse(ResponseEntity.notFound().build());
+                     return service.save(exam);
+        }).orElseThrow(() -> new ExamNotFoundException(id));
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
-        return service.findById(id)
-                .map(exam -> {
-                    service.delete(exam);
-                    return ResponseEntity.noContent().<Void>build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Void> deleteExam(@PathVariable Long id) {
+        service.findById(id)
+                .ifPresentOrElse(
+                        exam -> service.delete(exam),
+                        () -> { throw new ExamNotFoundException(id);}
+                );
+        return ResponseEntity.noContent().build();
     }
 
 

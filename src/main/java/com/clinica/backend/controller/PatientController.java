@@ -1,5 +1,6 @@
 package com.clinica.backend.controller;
 
+import com.clinica.backend.exception.PatientNotFoundException;
 import com.clinica.backend.service.PatientService;
 import com.clinica.backend.dto.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,24 +29,23 @@ public class PatientController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Patient> updatePatient(@PathVariable Long id, @RequestBody Patient patientNew){
-        return service.findById(id)
+        Patient updated = service.findById(id)
                  .map(patient ->  {
             patient.setName(patientNew.getName());
             patient.setEmail(patientNew.getEmail());
-            Patient updated = service.save(patient);
-            return ResponseEntity.ok(updated);
-        })
-                 .orElse(ResponseEntity.notFound().build());
+            return  service.save(patient);
+        }).orElseThrow(() -> new PatientNotFoundException(id) );
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
-        return service.findById(id)
-                .map(pacient -> {
-                    service.delete(pacient);
-                    return ResponseEntity.noContent().<Void>build();
-                })
-                .orElse(ResponseEntity.notFound().build());
+         service.findById(id)
+                 .ifPresentOrElse(
+                         patient -> service.delete(patient),
+                         () -> { throw new PatientNotFoundException(id); }
+                 );
+         return ResponseEntity.noContent().build();
     }
 
 

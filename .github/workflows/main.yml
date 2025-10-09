@@ -61,7 +61,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: spring-boot-app
-          path: target
+          path: target/app.jar
       - name: Deploy to Elastic Beanstalk (Staging)
         uses: einaregilsson/beanstalk-deploy@v21
         with:
@@ -89,7 +89,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: spring-boot-app
-          path: target
+          path: target/app.jar
   
       - name: Deploy to Elastic Beanstalk (Production)
         uses: einaregilsson/beanstalk-deploy@v21

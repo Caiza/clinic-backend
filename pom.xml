@@ -66,17 +66,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.mariadb.jdbc</groupId>
-            <artifactId>mariadb-java-client</artifactId>
-            <version>3.3.3</version>
-        </dependency>
-
-
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-
 
         <!-- Lombok -->
         <dependency>
@@ -194,6 +186,7 @@
                 </dependencies>
 
                 <configuration>
+                    <skip>${flyway.skip}</skip>
                     <driver>org.mariadb.jdbc.Driver</driver>
                     <url>jdbc:mariadb://localhost:3306/clinica?useSSL=false&amp;serverTimezone=UTC</url>
                     <user>root</user>
@@ -204,12 +197,13 @@
                     <locations>
                         <location>filesystem:src/main/resources/db/migration</location>
                     </locations>
+                    <cleanDisabled>false</cleanDisabled>
                 </configuration>
 
                 <executions>
                     <execution>
                         <id>flyway-migrate</id>
-                        <phase>compile</phase>
+                        <phase>process-resources</phase>
                         <goals>
                             <goal>migrate</goal>
                         </goals>
@@ -219,4 +213,20 @@
 
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ci</id>
+            <activation>
+                <property>
+                    <name>env.CI</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <flyway.skip>true</flyway.skip>
+            </properties>
+        </profile>
+    </profiles>
+
 </project>

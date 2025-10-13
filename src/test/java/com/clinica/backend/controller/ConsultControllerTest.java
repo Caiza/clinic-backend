@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -43,12 +47,13 @@ class ConsultControllerTest {
         consult.setId(1L);
         consult.setStatus("Agendada");
 
-        when(service.consultList()).thenReturn(Arrays.asList(consult));
+        Page<Consult> page = new PageImpl<>(Collections.singletonList(consult), PageRequest.of(0, 10), 1);
+        when(service.consultList(any(Pageable.class))).thenReturn(page);
 
         mockMvc.perform(get("/api/consult"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(1))
-                .andExpect(jsonPath("$[0].status").value("Agendada"));
+                .andExpect(jsonPath("$.content.length()").value(1))
+                .andExpect(jsonPath("$.content[0].status").value("Agendada"));
     }
 
     @Test

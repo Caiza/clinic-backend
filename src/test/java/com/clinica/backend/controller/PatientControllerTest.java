@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -20,6 +24,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @ActiveProfiles("test")
 @WebMvcTest(controllers = PatientController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -42,13 +47,15 @@ class PatientControllerTest {
         patient.setEmail("sdcsjkifj@gmail.com");
         patient.setObservations("sdfsddsgvdfgbf");
         patient.setPhone("43534546");
-        patient.setDateBirth(LocalDate.of(1999,5,5));
+        patient.setDateBirth(LocalDate.of(1999, 5, 5));
 
-        when(patientService.patientList()).thenReturn(Arrays.asList(patient));
+        Page<Patient> page = new PageImpl<>(Collections.singletonList(patient), PageRequest.of(0, 10), 1);
+        when(patientService.patientList(any(Pageable.class))).thenReturn(page);
 
         mockMvc.perform(get("/api/patient"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].name").value("Joao Roberto"));
+                .andExpect(jsonPath("$.content.length()").value(1))
+                .andExpect(jsonPath("$.content[0].name").value("Joao Roberto"));
     }
 
     @Test
@@ -59,7 +66,7 @@ class PatientControllerTest {
         patient.setEmail("sdcsjkifj@gmail.com");
         patient.setObservations("sdfsddsgvdfgbf");
         patient.setPhone("43534546");
-        patient.setDateBirth(LocalDate.of(1999,5,5));
+        patient.setDateBirth(LocalDate.of(1999, 5, 5));
 
         when(patientService.save(any(Patient.class))).thenReturn(patient);
 
@@ -78,7 +85,7 @@ class PatientControllerTest {
         patient.setEmail("sdcsjkifj@gmail.com");
         patient.setObservations("sdfsddsgvdfgbf");
         patient.setPhone("43534546");
-        patient.setDateBirth(LocalDate.of(1999,5,5));
+        patient.setDateBirth(LocalDate.of(1999, 5, 5));
 
         Patient updatedPatient = new Patient();
         updatedPatient.setId(1L);
@@ -102,7 +109,7 @@ class PatientControllerTest {
         patient.setEmail("sdcsjkifj@gmail.com");
         patient.setObservations("sdfsddsgvdfgbf");
         patient.setPhone("43534546");
-        patient.setDateBirth(LocalDate.of(1999,5,5));
+        patient.setDateBirth(LocalDate.of(1999, 5, 5));
 
         when(patientService.findById(1L)).thenReturn(Optional.of(patient));
 

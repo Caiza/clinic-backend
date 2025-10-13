@@ -7,11 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -40,11 +44,13 @@ class ExamControllerTest {
         exam.setId(1L);
         exam.setName("Complete Blood Count (CBC)");
 
-        when(examService.examList()).thenReturn(Arrays.asList(exam));
+        Page<Exam> page = new PageImpl<>(Collections.singletonList(exam), PageRequest.of(0, 10), 1);
+        when(examService.examList(any(Pageable.class))).thenReturn(page);
 
         mockMvc.perform(get("/api/exam"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].name").value("Complete Blood Count (CBC)"));
+                .andExpect(jsonPath("$.content.length()").value(1))
+                .andExpect(jsonPath("$.content[0].name").value("Complete Blood Count (CBC)"));
     }
 
     @Test

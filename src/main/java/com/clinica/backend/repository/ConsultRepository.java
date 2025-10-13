@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ConsultRepository extends JpaRepository<Consult, Long> {
-    Page<Consult> findyPatientNameContaingIgnoreCase(String patientName, Pageable pageable);
+    Page<Consult> findAll(Pageable pageable);
 }

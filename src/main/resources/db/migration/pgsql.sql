@@ -3,5 +3,10 @@ V2__create_patient_table.sql
 V3__create_exam_table.sql
 V4__create_doctors_table.sql
 V5__create_consult_table.sql
+V6__seed_roles.sql
+V7__add_enabled_column_to_users.sql
+V8__seed_users_and_roles.sql
+V9__seed_consult_exam_doctor_patient.sql
+V10__add_constraints_and_indexes.sql
 
 

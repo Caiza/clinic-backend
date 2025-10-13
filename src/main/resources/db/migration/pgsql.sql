@@ -1,5 +1,7 @@
-V1__create_consult_table.sql
-V2__create_exam_table.sql
-V3__create_doctors_table.sql
-V4__create_patient_table.sql
-V5__create_users_table.sql
+V1__create_users_table.sql
+V2__create_patient_table.sql
+V3__create_exam_table.sql
+V4__create_doctors_table.sql
+V5__create_consult_table.sql
+
+

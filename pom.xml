@@ -124,8 +124,6 @@
     <build>
         <finalName>app</finalName>
         <plugins>
-
-
             <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

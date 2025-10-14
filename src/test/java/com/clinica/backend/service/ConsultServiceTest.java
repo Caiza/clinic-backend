@@ -11,10 +11,12 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 @ActiveProfiles("test")
 public class ConsultServiceTest {
 
@@ -42,20 +44,18 @@ public class ConsultServiceTest {
 
         consult = new Consult();
         consult.setId(1L);
-        consult.setDate("2025-09-23");
-        consult.setStatus("Agendada");
+        consult.setDate(new Date());
         consult.setDoctor(doctor);
         consult.setPatient(patient);
 
     }
 
     @Test
-    void testSave(){
+    void testSave() {
         when(repository.save(consult)).thenReturn(consult);
         Consult result = service.save(consult);
         assertNotNull(result);
         assertEquals(1L, result.getId());
-        assertEquals("Agendada", result.getStatus());
         verify(repository, times(1)).save(consult);
 
     }
@@ -68,11 +68,10 @@ public class ConsultServiceTest {
     }
 
     @Test
-    void testFindById(){
+    void testFindById() {
         when(repository.findById(1L)).thenReturn(Optional.of(consult));
         Optional<Consult> result = service.findById(1L);
         assertTrue(result.isPresent());
-        assertEquals("Agendada", result.get().getStatus());
         assertEquals("Maria Silva", result.get().getPatient().getName());
         verify(repository, times(1)).findById(1L);
     }

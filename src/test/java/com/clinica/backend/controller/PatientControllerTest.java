@@ -110,6 +110,7 @@ class PatientControllerTest {
         patient.setObservations("sdfsddsgvdfgbf");
         patient.setPhone("43534546");
         patient.setDateBirth(LocalDate.of(1999, 5, 5));
+        
 
         when(patientService.findById(1L)).thenReturn(Optional.of(patient));
 

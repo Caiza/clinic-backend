@@ -34,7 +34,6 @@ public class ConsultController {
                 .map(consult -> {
                     consult.setPatient(consultNew.getPatient());
                     consult.setDate(consultNew.getDate());
-                    consult.setStatus(consultNew.getStatus());
                     consult.setDoctor(consultNew.getDoctor());
                     return service.save(consult);
 

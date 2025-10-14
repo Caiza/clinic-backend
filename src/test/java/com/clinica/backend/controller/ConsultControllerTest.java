@@ -45,41 +45,35 @@ class ConsultControllerTest {
     void testListAll() throws Exception {
         Consult consult = new Consult();
         consult.setId(1L);
-        consult.setStatus("Agendada");
 
         Page<Consult> page = new PageImpl<>(Collections.singletonList(consult), PageRequest.of(0, 10), 1);
         when(service.consultList(any(Pageable.class))).thenReturn(page);
 
         mockMvc.perform(get("/api/consult"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content.length()").value(1))
-                .andExpect(jsonPath("$.content[0].status").value("Agendada"));
+                .andExpect(jsonPath("$.content.length()").value(1));
     }
 
     @Test
     void testCreate() throws Exception {
         Consult consult = new Consult();
         consult.setId(1L);
-        consult.setStatus("Criada");
 
         when(service.save(any(Consult.class))).thenReturn(consult);
 
         mockMvc.perform(post("/api/consult")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"status\": \"Criada\"}"))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.status").value("Criada"));
+                .andExpect(status().isCreated());
     }
 
     @Test
     void testUpdatePatientFound() throws Exception {
         Consult existing = new Consult();
         existing.setId(1L);
-        existing.setStatus("Agendada");
 
         Consult updated = new Consult();
         updated.setId(1L);
-        updated.setStatus("Atualizada");
 
         when(service.findById(1L)).thenReturn(Optional.of(existing));
         when(service.save(any(Consult.class))).thenReturn(updated);
@@ -87,8 +81,7 @@ class ConsultControllerTest {
         mockMvc.perform(put("/api/consult/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"status\": \"Atualizada\"}"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value("Atualizada"));
+                .andExpect(status().isOk());
     }
 
     @Test

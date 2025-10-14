@@ -3,6 +3,8 @@ package com.clinica.backend.dto;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Date;
+
 
 @Entity
 @Table(name = "consult")
@@ -13,8 +15,8 @@ public class Consult {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String date;
-    private String status;
+    @Column(name = "consult_date")
+    private Date date;
 
     @ManyToOne
     @JoinColumn(name = "patient_id")
@@ -23,5 +25,9 @@ public class Consult {
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
+
+    @ManyToOne
+    @JoinColumn(name = "exam_id")
+    private Exam exam;
 
 }

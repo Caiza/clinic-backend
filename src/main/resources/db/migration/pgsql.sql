@@ -8,5 +8,6 @@ V7__add_enabled_column_to_users.sql
 V8__seed_users_and_roles.sql
 V9__seed_consult_exam_doctor_patient.sql
 V10__add_constraints_and_indexes.sql
+V11__add_observations_to_patient.sql
 
 

@@ -9,7 +9,6 @@ import lombok.Data;
 import java.time.LocalDate;
 
 
-
 @Entity
 @Table(name = "patient")
 @Data
@@ -26,14 +25,13 @@ public class Patient {
     @Email(message = "Email is invalid")
     @NotBlank(message = "e-mail is required")
     private String email;
-    
+
     private String phone;
 
-    @Column(name = "date_birth")
+    @Column(name = "birth_date")
     private LocalDate dateBirth;
 
     @Column(columnDefinition = "TEXT")
     private String observations;
-
 
 }

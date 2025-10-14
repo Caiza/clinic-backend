@@ -6,6 +6,7 @@ import com.clinica.backend.dto.Exam;
 import com.clinica.backend.dto.Patient;
 import com.clinica.backend.repository.ConsultRepository;
 import com.clinica.backend.repository.DoctorRepository;
+import com.clinica.backend.repository.ExamRepository;
 import com.clinica.backend.repository.PatientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class ConsultIntegrationTest {
     @Autowired
     private DoctorRepository doctorRepository;
 
+    @Autowired
+    private ExamRepository examRepository;
+
     @Test
     void shouldCreateAndFindConsult() {
         // Arrange
@@ -54,6 +58,7 @@ public class ConsultIntegrationTest {
 
         Exam exam = new Exam();
         exam.setName("Raio-X de Tórax");
+        examRepository.save(exam);
 
         Consult consult = new Consult();
         consult.setPatient(patient);
@@ -67,6 +72,6 @@ public class ConsultIntegrationTest {
 
         // Assert
         assertThat(result).hasSize(1);
-        assertThat(result.get(0).getPatient().getName()).isEqualTo("Dr. João Santos");
+        assertThat(result.get(0).getPatient().getName()).isEqualTo("Maria Silva");
     }
 }

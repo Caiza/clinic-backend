@@ -20,6 +20,11 @@
     <properties>
         <java.version>21</java.version>
         <mockito.version>5.14.2</mockito.version>
+        <!-- 🔍 Configurações do SonarCloud -->
+        <sonar.projectKey>Caiza_clinic-backend</sonar.projectKey>
+        <sonar.organization>caiza</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
     <dependencies>
@@ -240,6 +245,13 @@
                 </executions>
             </plugin>
 
+            <!-- SonarCloud Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.10.0.2594</version>
+            </plugin>
+
         </plugins>
     </build>
 
@@ -257,5 +269,6 @@
             </properties>
         </profile>
     </profiles>
+
 
 </project>

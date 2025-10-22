@@ -1,6 +1,6 @@
 package com.clinica.backend.repository;
 
-import com.clinica.backend.dto.User;
+import com.clinica.backend.user.User;
 import com.clinica.backend.factoryTest.UserFactory;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @Disabled("Disabled on CI environment")
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -20,7 +21,7 @@ public class RepositoyTest {
     private UserRepository userRepository;
 
     @Test
-    void shouldRegisterByUsename(){
+    void shouldRegisterByUsename() {
         User user = UserFactory.createUser("Tete", "1234", "maria joao", "USER");
 
         userRepository.save(user);
@@ -30,7 +31,7 @@ public class RepositoyTest {
     }
 
     @Test
-    void shouldReturnEmptyWhenUserNotFound(){
+    void shouldReturnEmptyWhenUserNotFound() {
         Optional<User> result = userRepository.findByUsername("zero");
         assertTrue(result.isEmpty());
     }

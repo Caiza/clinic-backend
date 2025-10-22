@@ -1,6 +1,7 @@
 package com.clinica.backend.controller;
 
-import com.clinica.backend.dto.User;
+import com.clinica.backend.user.Role;
+import com.clinica.backend.user.User;
 import com.clinica.backend.service.UserService;
 import com.clinica.backend.util.JwtUtil;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -50,10 +51,10 @@ public class AuthController {
             throw new RuntimeException("Usuário já existe");
         }
 
-        User newUser = new User(request.getUsername(), passwordEncoder.encode(request.getPassword()), "USER");
+        User newUser = new User(request.getUsername(), passwordEncoder.encode(request.getPassword()), Role.DOCTOR);
         newUser.setUsername(request.getUsername());
         newUser.setPassword(passwordEncoder.encode(request.getPassword()));
-        newUser.setRole("USER");
+        newUser.setRole(Role.DOCTOR);
 
         userService.save(newUser);
 

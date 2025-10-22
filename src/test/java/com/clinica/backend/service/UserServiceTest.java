@@ -1,6 +1,6 @@
 package com.clinica.backend.service;
 
-import com.clinica.backend.dto.User;
+import com.clinica.backend.user.User;
 import com.clinica.backend.factoryTest.UserFactory;
 import com.clinica.backend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    void shouldRegisterUserSuccessfully(){
+    void shouldRegisterUserSuccessfully() {
         User user = UserFactory.createUser("joao", "1234", "joao", "USER");
         when(userRepository.save(any(User.class))).thenReturn(user);
         User saved = userService.save(user);
@@ -34,14 +34,12 @@ public class UserServiceTest {
     }
 
     @Test
-    void shouldRegisterUserFail(){
+    void shouldRegisterUserFail() {
         User user = UserFactory.createUser(null, "1234", "joao", "USER");
         when(userRepository.save(any(User.class))).thenReturn(user);
         User saved = userService.save(user);
         assertNull(null, saved.getUsername());
     }
-
-
 
 
 }

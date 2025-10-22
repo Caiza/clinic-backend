@@ -1,6 +1,6 @@
 package com.clinica.backend.repository;
 
-import com.clinica.backend.dto.User;
+import com.clinica.backend.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

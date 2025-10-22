@@ -43,7 +43,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594:sonar \
           -Dsonar.projectKey=Caiza_clinic-backend \
-          -Dsonar.organization=caiza \
+          -Dsonar.organization=Caiza Fortunato \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
         

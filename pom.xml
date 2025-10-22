@@ -22,7 +22,7 @@
         <mockito.version>5.14.2</mockito.version>
         <!-- 🔍 Configurações do SonarCloud -->
         <sonar.projectKey>Caiza_clinic-backend</sonar.projectKey>
-        <sonar.organization>Caiza Fortunato</sonar.organization>
+        <sonar.organization>caiza</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>

@@ -11,10 +11,10 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.clinica-backend</groupId>
-    <artifactId>clinica-backend</artifactId>
+    <groupId>com.clinic-backend</groupId>
+    <artifactId>clinic-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>clinica-backend</name>
+    <name>clinic-backend</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

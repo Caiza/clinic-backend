@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return repository.findByUsername(username)
                 .map(user -> User.withUsername(user.getUsername())
                         .password(user.getPassword()) // já vem criptografada
-                        .roles(user.getRole())        // ex: "USER", "ADMIN"
+                        .roles(user.getRole().name())        // ex: "USER", "ADMIN"
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado: " + username));
     }

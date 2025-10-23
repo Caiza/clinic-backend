@@ -1,5 +1,6 @@
 package com.clinica.backend.repository;
 
+import com.clinica.backend.user.Role;
 import com.clinica.backend.user.User;
 import com.clinica.backend.factoryTest.UserFactory;
 import org.junit.jupiter.api.Disabled;
@@ -22,7 +23,7 @@ public class RepositoyTest {
 
     @Test
     void shouldRegisterByUsename() {
-        User user = UserFactory.createUser("Tete", "1234", "maria joao", "USER");
+        User user = UserFactory.createUser("Tete", "1234", "maria joao", Role.DOCTOR);
 
         userRepository.save(user);
         User found = userRepository.findByUsername("Tete").orElse(null);
